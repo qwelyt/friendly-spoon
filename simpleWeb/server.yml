@@ -1,1 +1,17 @@
 # Config settings go here
+system:
+  name: "Simple web fun!"
+  version: 0.0.1
+
+server:
+  port: 8989
+
+rabbitmq:
+  host: localhost
+  port: 5672
+  user: guest
+  password: guest
+
+rabbitqs:
+  out: "out"
+  in: "in"
