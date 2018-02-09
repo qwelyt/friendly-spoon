@@ -1,3 +1,5 @@
+import config.ConfigParser;
+import config.Configuration;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
@@ -20,14 +22,23 @@ public final class SimpleWeb {
                                               .map(s -> s.split("=")[1])
                                               .findFirst();
         if (config.isPresent()) {
-            new SimpleWeb().run(config.get());
+            final Optional<Configuration> configuration = ConfigParser.parse(config.get());
+            if (configuration.isPresent()) {
+                new SimpleWeb().run(configuration.get());
+            } else {
+                noConfig();
+            }
         } else {
-            System.err.println("No config!");
-            System.exit(1);
+            noConfig();
         }
     }
 
-    private void run(final String config) throws Exception {
+    private static void noConfig() {
+        System.err.println("No config!");
+        System.exit(1);
+    }
+
+    private void run(final Configuration config) throws Exception {
         System.out.println("Running with config: " + config);
 
         final int port = 8989;
