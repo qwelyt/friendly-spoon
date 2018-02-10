@@ -1,7 +1,11 @@
 package config;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public final class SystemFactory {
+    @JsonProperty("name")
     private String name;
+    @JsonProperty("version")
     private String version;
 
     public String name() {

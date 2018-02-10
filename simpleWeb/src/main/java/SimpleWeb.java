@@ -41,7 +41,7 @@ public final class SimpleWeb {
     private void run(final Configuration config) throws Exception {
         System.out.println("Running with config: " + config);
 
-        final int port = 8989;
+        final int port = config.server().port();
         startServer(port, resourceConfig());
 
         System.out.println("===== Server running on port: " + port);
