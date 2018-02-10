@@ -30,12 +30,10 @@ public final class Configuration {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Configuration{");
-        sb.append("system=").append(system);
-        sb.append(", server=").append(server);
-        sb.append(", rabbitmq=").append(rabbitmq);
-        sb.append(", rabbitqs=").append(rabbitqs);
-        sb.append('}');
-        return sb.toString();
+        return "Configuration{" + "system=" + system +
+               ", server=" + server +
+               ", rabbitmq=" + rabbitmq +
+               ", rabbitqs=" + rabbitqs +
+               '}';
     }
 }

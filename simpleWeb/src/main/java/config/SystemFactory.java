@@ -18,10 +18,8 @@ public final class SystemFactory {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("SystemFactory{");
-        sb.append("name='").append(name).append('\'');
-        sb.append(", version='").append(version).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "SystemFactory{" + "name='" + name + '\'' +
+               ", version='" + version + '\'' +
+               '}';
     }
 }

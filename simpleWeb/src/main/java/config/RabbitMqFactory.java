@@ -30,12 +30,10 @@ public final class RabbitMqFactory {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("RabbitMqFactory{");
-        sb.append("host='").append(host).append('\'');
-        sb.append(", port=").append(port);
-        sb.append(", user='").append(user).append('\'');
-        sb.append(", password='").append(password).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "RabbitMqFactory{" + "host='" + host + '\'' +
+               ", port=" + port +
+               ", user='" + user + '\'' +
+               ", password='" + password + '\'' +
+               '}';
     }
 }

@@ -18,10 +18,8 @@ public final class ServerFactory {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("ServerFactory{");
-        sb.append("host='").append(host).append('\'');
-        sb.append(", port=").append(port);
-        sb.append('}');
-        return sb.toString();
+        return "ServerFactory{" + "host='" + host + '\'' +
+               ", port=" + port +
+               '}';
     }
 }

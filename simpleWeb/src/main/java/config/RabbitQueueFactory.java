@@ -18,10 +18,8 @@ public final class RabbitQueueFactory {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("RabbitQueueFactory{");
-        sb.append("out='").append(out).append('\'');
-        sb.append(", in='").append(in).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "RabbitQueueFactory{" + "out='" + out + '\'' +
+               ", in='" + in + '\'' +
+               '}';
     }
 }
