@@ -16,11 +16,11 @@ public final class InputRabbitMq implements InputQueue {
         }
     }
 
-    private void listenPubSub(final Channel channel, final String queueName, final Consumer<String> handler) {
+    private void listenPubSub(final Channel channel, final String name, final Consumer<String> handler) {
         try {
-            channel.exchangeDeclare(queueName, BuiltinExchangeType.FANOUT);
+            channel.exchangeDeclare(name, BuiltinExchangeType.FANOUT);
             final String queue = channel.queueDeclare().getQueue();
-            channel.queueBind(queue, queueName, "");
+            channel.queueBind(queue, name, "");
             final DefaultConsumer consumer = new DefaultConsumer(channel) {
                 @Override
                 public void handleDelivery(final String consumerTag, final Envelope envelope, final AMQP.BasicProperties properties, final byte[] body) throws IOException {
@@ -28,7 +28,7 @@ public final class InputRabbitMq implements InputQueue {
                     handler.accept(message);
                 }
             };
-            channel.basicConsume(queueName, true, consumer);
+            channel.basicConsume(queue, true, consumer);
         } catch (IOException e) {
             e.printStackTrace();
         }
