@@ -9,8 +9,18 @@ server:
 rabbitmq:
   host: localhost
   port: 5672
-  user: guest
-  password: guest
+  user: test
+  password: test
+  virtualHost: "/"
+  useSsl: false
+  ssl:
+    keyPassword: ""
+    certFormat: "PKCS12"
+    pathToCert: ""
+    rabbitTrustStorePassword: ""
+    pathToRabbitTrustStore: ""
+    tlsVersion: "TLSv1.2"
+
 
 rabbitqs:
   out: "out"

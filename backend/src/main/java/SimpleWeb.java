@@ -1,8 +1,5 @@
 import com.rabbitmq.client.Connection;
-import config.ConfigParser;
-import config.Configuration;
-import config.RabbitMqFactory;
-import config.RabbitQueueFactory;
+import config.*;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
@@ -12,6 +9,11 @@ import queue.*;
 import queue.rabbitmq.RabbitMqConnectionService;
 
 import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
 import java.util.AbstractMap;
 import java.util.Arrays;
 import java.util.Optional;
@@ -47,6 +49,7 @@ public final class SimpleWeb {
     }
 
     private OutputQueue outputQueue;
+
     private void run(final Configuration config) throws Exception {
         System.out.println("Running with config: " + config);
 
@@ -72,8 +75,13 @@ public final class SimpleWeb {
         outputQueue.publish(s);
     }
 
-    private Connection setupRabbitMq(final RabbitMqFactory rabbitmq) throws IOException, TimeoutException {
-        return RabbitMqConnectionService.instance(rabbitmq.host(), rabbitmq.port(), rabbitmq.user(), rabbitmq.password());
+    private Connection setupRabbitMq(final RabbitMqFactory rabbitmq) throws IOException, TimeoutException, NoSuchAlgorithmException, KeyManagementException, CertificateException, KeyStoreException, UnrecoverableKeyException {
+        if (rabbitmq.useSsl()) {
+            RabbitMqSSLFactory ssl = rabbitmq.ssl();
+            return RabbitMqConnectionService.instanceSSL(rabbitmq.host(), rabbitmq.port(), rabbitmq.user(), rabbitmq.password(), rabbitmq.virtualHost(), ssl.keyPassword(), ssl.certFormat(), ssl.pathToCert(), ssl.rabbitTrustStorePassword(), ssl.pathToRabbitTrustStore(), ssl.tlsVersion());
+        } else {
+            return RabbitMqConnectionService.instance(rabbitmq.host(), rabbitmq.port(), rabbitmq.user(), rabbitmq.password(), rabbitmq.virtualHost());
+        }
     }
 
     private ResourceConfig resourceConfig() {
