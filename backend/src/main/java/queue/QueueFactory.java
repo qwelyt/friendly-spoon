@@ -45,8 +45,7 @@ public final class QueueFactory {
     }
 
     private static Connection connection() {
-        final Connection instance = RabbitMqConnectionService.instance();
-        return instance;
+        return RabbitMqConnectionService.instance();
     }
 
 }

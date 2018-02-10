@@ -47,7 +47,6 @@ public final class SimpleWeb {
     }
 
     private OutputQueue outputQueue;
-
     private void run(final Configuration config) throws Exception {
         System.out.println("Running with config: " + config);
 
