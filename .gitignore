@@ -38,3 +38,5 @@
 # java
 *.class
 
+# node
+*/**.node_modules
